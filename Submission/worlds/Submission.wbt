@@ -3,32 +3,16 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.966508064922862 -0.23582695868863163 -0.10123144765701614 0.892520261379353
-  position -0.532021930706608 2.0771142106264633 1.6474161162536358
+  orientation 0.1998619581857681 0.9633046766117618 0.17916276869946865 4.750875151135781
+  position 1.162607683654234 1.3495023735741098 0.349647003284562
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-RectangleArena {
-  floorTileSize 0.25 0.25
-  wallHeight 0.05
+RobotstadiumSoccerField {
 }
-WoodenBox {
-  translation 0.442718 0.05 -0.436988
-  size 0.1 0.1 0.1
-}
-WoodenBox {
-  translation -0.437282 0.05 -0.436988
-  name "wooden box(1)"
-  size 0.1 0.1 0.1
-}
-WoodenBox {
-  translation 0.442718 0.05 0.443012
-  name "wooden box(2)"
-  size 0.1 0.1 0.1
-  mass 0.6
-}
-E-puck {
-  controller "my_controller"
+UR3e {
+  translation 4.43 0 0
+  rotation 3.390498950813652e-09 -0.7071067811865476 -0.7071067811865476 3.14159
 }
