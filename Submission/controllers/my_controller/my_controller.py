@@ -1,4 +1,7 @@
 from controller import Robot, Motor, DistanceSensor
+from ikpy.chain import Chain
+
+
 
 robot = Robot()
 
@@ -9,4 +12,10 @@ for name in motNames:
     mot.append(robot.getMotor(name))
     print("Got " + name)
     
+    
+#print(robot)  
+my_chain = Chain.from_urdf_file("../../ur10.urdf")
+print(my_chain.links)
+
+
 pass
