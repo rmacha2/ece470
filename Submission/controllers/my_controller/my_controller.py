@@ -24,28 +24,8 @@ b = np.array([0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 z = 0
 
 while 1:
-    i = 1
+    
     if z == 1:
-        while i < 7:
-            mot[i -1].setVelocity(0.5)
-            mot[i - 1].setPosition(a[i-1])
-            i +=1
-        
-        ret = my_chain.forward_kinematics(a, True)
-        
-        j = 1
-        for item in ret:
-            if j == 1:
-                print("origin is")
-            elif j == 8:
-                print("end is")
-            else:
-                print("joint " + str(j -1 ) + " is ")
-            print(item)
-            j +=1
-            z = 0
-            robot.step(3200)
-    else:
         i = 1
         while i < 7:
             mot[i -1].setVelocity(0.5)
@@ -64,6 +44,32 @@ while 1:
                 print("joint " + str(j -1 ) + " is ")
             print(item)
             j +=1
-            z = 1
-            robot.step(3200)
+        robot.step(16000) 
+        z = 0
+        
+            
+    else:
+        
+        i = 1
+        while i < 7:
+            mot[i -1].setVelocity(0.5)
+            mot[i - 1].setPosition(a[i-1])
+            i +=1
+        
+        ret = my_chain.forward_kinematics(a, True)
+        
+        j = 1
+        for item in ret:
+            if j == 1:
+                print("origin is")
+            elif j == 8:
+                print("end is")
+            else:
+                print("joint " + str(j -1 ) + " is ")
+            print(item)
+            j +=1
+        robot.step(16000) 
+        z = 1
+        
+       
 pass
