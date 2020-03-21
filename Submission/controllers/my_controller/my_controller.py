@@ -19,42 +19,51 @@ for name in motNames:
 my_chain = Chain.from_urdf_file("../../ur10.urdf")
 #sprint(my_chain.links)
 
-a = np.array([7.0,1.57,0.0,0.0,0.0,0.0,0.0,7.0])
-i = 1
+a = np.array([6.0,-0.5,0.0,0.0,0.0,0.0,0.0,7.0])
+b = np.array([0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])
+z = 0
 
-while i < 7:
-    mot[i -1].setVelocity(0.5)
-    mot[i - 1].setPosition(a[i])
-    i +=1
-
-ret = my_chain.forward_kinematics(a, True)
-
-j = 1
-for item in ret:
-    if j == 1:
-        print("origin is")
-    elif j == 8:
-        print("end is")
-    else:
-        print("joint " + str(j -1 ) + " is ")
-    print(item)
-    j +=1
-"""
 while 1:
-    if robot.step(32) == -1:
-        break
-
-
-a = np.array([7.0,0.0,0.0,0.0,0.0,0.0,0.0,7.0])
-i = 1
-
-while i < 7:
-    mot[i -1].setVelocity(0.5)
-    mot[i - 1].setPosition(a[i])
-    i +=1
-
-ret = my_chain.forward_kinematics(a)
-print(ret)
-"""
-
+    i = 1
+    if z == 1:
+        while i < 7:
+            mot[i -1].setVelocity(0.5)
+            mot[i - 1].setPosition(a[i-1])
+            i +=1
+        
+        ret = my_chain.forward_kinematics(a, True)
+        
+        j = 1
+        for item in ret:
+            if j == 1:
+                print("origin is")
+            elif j == 8:
+                print("end is")
+            else:
+                print("joint " + str(j -1 ) + " is ")
+            print(item)
+            j +=1
+            z = 0
+            robot.step(3200)
+    else:
+        i = 1
+        while i < 7:
+            mot[i -1].setVelocity(0.5)
+            mot[i - 1].setPosition(b[i-1])
+            i +=1
+        
+        ret = my_chain.forward_kinematics(b, True)
+        
+        j = 1
+        for item in ret:
+            if j == 1:
+                print("origin is")
+            elif j == 8:
+                print("end is")
+            else:
+                print("joint " + str(j -1 ) + " is ")
+            print(item)
+            j +=1
+            z = 1
+            robot.step(3200)
 pass
