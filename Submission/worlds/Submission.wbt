@@ -3,8 +3,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.5276723991582912 -0.6900574421321979 -0.49536104582869794 4.403349909349405
-  position 3.9449061919053667 5.465331076813235 -0.8793559405389574
+  orientation 0.10747019741492524 0.9877450896906721 0.1131803625173685 4.6204149385254505
+  position -3.3001964584133336 1.133886172844575 -0.668357900002503
 }
 TexturedBackground {
 }
@@ -13,10 +13,12 @@ TexturedBackgroundLight {
 RobotstadiumSoccerField {
 }
 UR10e {
+  translation 4.26 0 0
+  rotation -0.577349935856137 0.577349935856137 0.5773509358560258 2.0944
   controller "my_controller"
 }
 E-puck {
-  translation 4.46 0.34 -1.68233e-05
+  translation 4.84 0.41 2.61054e-12
   rotation -1.7333999999947916e-06 0.9999999999969953 1.7333999999947916e-06 1.5708
   controller "camera_controller"
   camera_width 300
@@ -24,6 +26,6 @@ E-puck {
   kinematic TRUE
 }
 SoccerBall {
-  translation 3.25 0.1 0
+  translation -0.01 0.1 2.39543e-05
   rotation 0 1 0 -3.1415853071795863
 }

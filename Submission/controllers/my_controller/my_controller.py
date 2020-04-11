@@ -3,14 +3,7 @@ from ikpy.chain import Chain
 import numpy as np
 import time
 
-
-
 robot = Robot()
-
-
-
-
-
 
 # initialize motors
 mot = []
@@ -18,7 +11,6 @@ motNames = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1
 for name in motNames:
     mot.append(robot.getMotor(name))
    # print("Got " + name)
-    
     
 #print(robot)  
 my_chain = Chain.from_urdf_file("../../ur10.urdf")
@@ -28,8 +20,7 @@ a = np.array([6.0,-0.5,0.0,0.0,0.0,0.0,0.0,7.0])
 b = np.array([0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0])
 z = 0
 
-while 1:
-    
+while 1:  
     if z == 1:
         i = 1
         while i < 7:
