@@ -39,11 +39,15 @@ while 1:
             else:
                 print("joint " + str(j -1 ) + " is ")
             print(item)
-            j +=1
+            j += 1
+            #function v
+            inv = my_chain.inverse_kinematics(ret[7], 0)
+            print(inv[0])
+            #function ^
         robot.step(16000) 
         z = 0
         
-            
+        
     else:
         
         i = 1
