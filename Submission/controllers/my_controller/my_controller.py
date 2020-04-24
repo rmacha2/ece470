@@ -1,10 +1,13 @@
-from controller import Robot, Motor, DistanceSensor
+from controller import Robot, Motor, DistanceSensor, Receiver
 from ikpy.chain import Chain
 import ikpy
 import numpy as np
 import time
 
 robot = Robot()
+receiver = robot.getReceiver('receiver')
+receiver.enable(32)
+receiver.setChannel(1)
 
 # initialize motors
 mot = []
@@ -31,6 +34,16 @@ T1 = np.array([[0.0,0.0,0.0,1.5],\
 tempAngles = []
 
 while 1:  
+    
+    while receiver.getQueueLength() > 0:
+        print("Receiver data is")
+        data_byte = receiver.getData()
+        data_str = data_byte.decode()
+        data_list = data_str.split(" ")
+        data = [float(data_list[0]),float(data_list[1]),float(data_list[2])]
+        
+        print(data)
+        receiver.nextPacket()
     if z == 1:
         i = 1
         while i < 7:
@@ -59,9 +72,9 @@ while 1:
 
             #function ^
         print(ret[7])
-        print("helpy helpy")
+       # print("helpy helpy")
         inv = ikpy.inverse_kinematics.inverse_kinematic_optimization(chain = my_chain, target_frame = ret[7], starting_nodes_angles = b)
-        print(inv)
+       # print(inv)
         robot.step(16000) 
         z = 0
         

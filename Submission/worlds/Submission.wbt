@@ -3,7 +3,7 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.10747019741492524 0.9877450896906721 0.1131803625173685 4.6204149385254505
+  orientation 0.10690670205809491 0.9878759940702222 0.11256987783075906 4.6205489241026925
   position -3.3001964584133336 1.133886172844575 -0.668357900002503
 }
 TexturedBackground {
@@ -12,20 +12,26 @@ TexturedBackgroundLight {
 }
 RobotstadiumSoccerField {
 }
-UR10e {
+DEF MY_ROBOT Robot {
+  children [
+    Emitter {
+      channel 1
+    }
+  ]
+  controller "supervisor_controller"
+  supervisor TRUE
+}
+DEF UR10 UR10e {
   translation 4.26 0 0
   rotation -0.577349935856137 0.577349935856137 0.5773509358560258 2.0944
   controller "my_controller"
+  toolSlot [
+    DEF receiver Receiver {
+      channel 1
+    }
+  ]
 }
-E-puck {
-  translation 4.84 0.41 2.61054e-12
-  rotation -1.7333999999947916e-06 0.9999999999969953 1.7333999999947916e-06 1.5708
-  controller "camera_controller"
-  camera_width 300
-  camera_height 200
-  kinematic TRUE
-}
-SoccerBall {
+DEF BALL SoccerBall {
   translation -0.01 0.1 2.39543e-05
   rotation 0 1 0 -3.1415853071795863
 }
