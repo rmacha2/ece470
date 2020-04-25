@@ -3,8 +3,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 0.10690670205809491 0.9878759940702222 0.11256987783075906 4.6205489241026925
-  position -3.3001964584133336 1.133886172844575 -0.668357900002503
+  orientation 0.04823278526227095 0.997664336613655 0.048368066687429025 4.643078693145036
+  position -2.4710174180279503 0.22251516606572097 -0.02288458599797365
 }
 TexturedBackground {
 }
@@ -22,6 +22,17 @@ DEF MY_ROBOT Robot {
   supervisor TRUE
 }
 DEF UR10 UR10e {
+  hidden position_0_0 -9.793067053465165e-05
+  hidden rotation_1 0 0 -0.9999999999999999 9.793067171676475e-05
+  hidden position_1_0 0.0001177595456047715
+  hidden rotation_2 0 0.9999999999999999 0 1.5709137595456049
+  hidden position_2_0 2.629757534432485e-05
+  hidden rotation_3 0 0.9999999999999999 0 2.6297573327991164e-05
+  hidden position_3_0 4.8175492647731395e-06
+  hidden rotation_4 0 1 0 1.5708008175492645
+  hidden position_4_0 -1.0645917569718222e-07
+  hidden rotation_5 0 0 -1 1.0745380149674385e-07
+  hidden position_5_0 -4.595435143528448e-12
   translation 4.26 0 0
   rotation -0.577349935856137 0.577349935856137 0.5773509358560258 2.0944
   controller "my_controller"
@@ -32,6 +43,27 @@ DEF UR10 UR10e {
   ]
 }
 DEF BALL SoccerBall {
-  translation -0.01 0.1 2.39543e-05
-  rotation 0 1 0 -3.1415853071795863
+  translation -0.0100114 0.11252911954409789 -1.57998
+  rotation 0 1 0 -3.141585307179586
+}
+Robot {
+  translation 0 0.09671263729617367 0
+  children [
+    DEF ball Shape {
+      appearance PBRAppearance {
+      }
+      geometry Sphere {
+        radius 0.1
+      }
+    }
+    GPS {
+    }
+  ]
+  name "robot(1)"
+  model "SoccerBall"
+  boundingObject USE ball
+  physics Physics {
+  }
+  controller "GPS_controller"
+  linearVelocity 0 2.5943031530420694e-09 0
 }

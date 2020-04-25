@@ -66,12 +66,12 @@ while 1:
             else:
                # print("joint " + str(j -1 ) + " is ")
                x = 2
-            print(item)
-            j += 1
+            #print(item)
+            #j += 1
             #function v
 
             #function ^
-        print(ret[7])
+        #print(ret[7])
        # print("helpy helpy")
         inv = ikpy.inverse_kinematics.inverse_kinematic_optimization(chain = my_chain, target_frame = ret[7], starting_nodes_angles = b)
        # print(inv)
@@ -89,16 +89,16 @@ while 1:
         
         ret = my_chain.forward_kinematics(a, True)
         
-        j = 1
-        for item in ret:
-            if j == 1:
-                print("origin is")
-            elif j == 8:
-                print("end is")
-            else:
-                print("joint " + str(j -1 ) + " is ")
-            print(item)
-            j +=1
+       # j = 1
+        #for item in ret:
+            #if j == 1:
+              #  print("origin is")
+            #elif j == 8:
+              #  print("end is")
+           # else:
+            #    print("joint " + str(j -1 ) + " is ")
+            #print(item)
+            #j +=1
         robot.step(16000) 
         z = 1
         
