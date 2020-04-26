@@ -14,7 +14,7 @@ emitter.setChannel(1)
 
 ball_node = sup.getFromDef("BALL")
 trans_field = ball_node.getField("translation")
-ball_node.setVelocity([.5,0,0])
+ball_node.setVelocity([1,0,0])
 
 
 

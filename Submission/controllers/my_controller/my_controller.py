@@ -12,6 +12,7 @@ receiver.setChannel(1)
 
 # initialize motors
 mot = []
+angles = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
 motNames = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
 for name in motNames:
     mot.append(robot.getMotor(name))
@@ -39,21 +40,20 @@ while 1:
     data = np.empty(3)
     robot.step(100)
     while receiver.getQueueLength()>0:
-        print("Receiver data is")
         data_byte = receiver.getData()
         data_str = data_byte.decode()
         data_list = data_str.split(" ")
         data = [-1 * (float(data_list[0])-4.26),float(data_list[1]),float(data_list[2])]
         
-        #print(data)
-        receiver.nextPacket()
-        
-    if data[0]**2 + data[1]**2 + data[2]**2 > 1.3**2:
-        data[0]=3.62-4.26
+       # print(data)
+        receiver.nextPacket()   
+    print("Receiver data is")
+    actual_data = [-1 * data[2],data[0], data[1]]
+    print(actual_data) 
             
             
     target_frame = np.eye(4)
-    target_frame[:3, 3] = data
+    target_frame[:3, 3] = actual_data
     inv = ikpy.inverse_kinematics.inverse_kinematic_optimization(my_chain,target_frame,angles)
         
     
@@ -71,3 +71,8 @@ while 1:
         i +=1
         
     robot.step(200)
+    i = 0
+    while i < 8:
+        angles[i] = inv[i]
+        i +=1
+    
