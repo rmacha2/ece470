@@ -43,16 +43,13 @@ while 1:
         data_byte = receiver.getData()
         data_str = data_byte.decode()
         data_list = data_str.split(" ")
-        data = [float(data_list[0]) - 4.26,float(data_list[1]),float(data_list[2])]
+        data = [float(data_list[0])-4.26,float(data_list[1]),float(data_list[2])]
         
         #print(data)
         receiver.nextPacket()
         
     if data[0]**2 + data[1]**2 + data[2]**2 > 1.3**2:
-        data_ = np.asarray(data)
-        data_hat = data_/(data_**2).sum()**0.5
-        data = data_hat*1.1
-        print("smaller data = ", data)
+        data[0]=3.62-4.26
             
             
     target_frame = np.eye(4)
