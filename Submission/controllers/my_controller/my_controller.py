@@ -43,7 +43,7 @@ while 1:
         data_byte = receiver.getData()
         data_str = data_byte.decode()
         data_list = data_str.split(" ")
-        data = [float(data_list[0])-4.26,float(data_list[1]),float(data_list[2])]
+        data = [-1 * (float(data_list[0])-4.26),float(data_list[1]),float(data_list[2])]
         
         #print(data)
         receiver.nextPacket()
