@@ -31,3 +31,7 @@ while robot.step(timestep) != -1:
     pass
 
 # Enter here exit cleanup code.
+
+
+def loc():
+    return GPS.getValues(gp)

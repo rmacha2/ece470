@@ -5,6 +5,7 @@ import numpy as np
 import time
 
 robot = Robot()
+robot.step(100)
 receiver = robot.getReceiver('receiver')
 receiver.enable(32)
 receiver.setChannel(1)
@@ -30,75 +31,46 @@ T1 = np.array([[0.0,0.0,0.0,1.5],\
                 [0.0,0.0,0.0,1.0],\
                 [0.0,0.0,0.0,2.0],\
                 [0.0,0.0,0.0,1.0]])
-                
-tempAngles = []
-
+               
+robot.step(100)
+print("prgm started")
+angles = np.zeros(8)
 while 1:  
-    
-    while receiver.getQueueLength() > 0:
+    data = np.empty(3)
+    robot.step(100)
+    while receiver.getQueueLength()>0:
         print("Receiver data is")
         data_byte = receiver.getData()
         data_str = data_byte.decode()
         data_list = data_str.split(" ")
-        data = [float(data_list[0]),float(data_list[1]),float(data_list[2])]
+        data = [float(data_list[0]) - 4.26,float(data_list[1]),float(data_list[2])]
         
-        print(data)
+        #print(data)
         receiver.nextPacket()
-    if z == 1:
-        i = 1
-        while i < 7:
-            mot[i -1].setVelocity(0.5)
-            mot[i - 1].setPosition(b[i-1])
-            i +=1
         
-        ret = my_chain.forward_kinematics(b, True)
-       # print(ret)
+    if data[0]**2 + data[1]**2 + data[2]**2 > 1.3**2:
+        data_ = np.asarray(data)
+        data_hat = data_/(data_**2).sum()**0.5
+        data = data_hat*1.1
+        print("smaller data = ", data)
+            
+            
+    target_frame = np.eye(4)
+    target_frame[:3, 3] = data
+    inv = ikpy.inverse_kinematics.inverse_kinematic_optimization(my_chain,target_frame,angles)
         
-       # print("help")
-        j = 1
-        for item in ret:
-            if j == 1:
-             #   print("origin is")
-             x = 2
-            elif j == 8:
-              #  print("end is")
-              x = 2
-            else:
-               # print("joint " + str(j -1 ) + " is ")
-               x = 2
-            #print(item)
-            #j += 1
-            #function v
-
-            #function ^
-        #print(ret[7])
-       # print("helpy helpy")
-        inv = ikpy.inverse_kinematics.inverse_kinematic_optimization(chain = my_chain, target_frame = ret[7], starting_nodes_angles = b)
-       # print(inv)
-        robot.step(16000) 
-        z = 0
+    
+    print("inv is ", inv)
+            
+    
+    i = 1
+    while i < 7:
+        mot[i-1].setVelocity(1)
+        if i == 1 or i == 3:
+            mot[i-1].setPosition(inv[i])
+        else:
+            mot[i-1].setPosition(inv[i])
+              
+        i +=1
         
-        
-    else:
-        
-        i = 1
-        while i < 7:
-            mot[i -1].setVelocity(0.5)
-            mot[i - 1].setPosition(a[i-1])
-            i +=1
-        
-        ret = my_chain.forward_kinematics(a, True)
-        
-       # j = 1
-        #for item in ret:
-            #if j == 1:
-              #  print("origin is")
-            #elif j == 8:
-              #  print("end is")
-           # else:
-            #    print("joint " + str(j -1 ) + " is ")
-            #print(item)
-            #j +=1
-        robot.step(16000) 
-        z = 1
-        
+    robot.step(200)
