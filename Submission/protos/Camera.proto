@@ -1,0 +1,21 @@
+PROTO Camera [
+  field SFFloat  fieldOfView            0.7854  # [0, pi]
+  field SFInt32  width                  64      # [0, inf)
+  field SFInt32  height                 64      # [0, inf)
+  field SFBool   spherical              FALSE   # {TRUE, FALSE}
+  field SFFloat  near                   0.01    # [0, inf)
+  field SFFloat  far                    0.0     # [0, inf)
+  field SFBool   antiAliasing           FALSE   # {TRUE, FALSE}
+  field SFFloat  ambientOcclusionRadius 0       # [0, inf)
+  field SFFloat  bloomThreshold         -1.0    # [-1, inf)
+  field SFFloat  motionBlur             0.0     # [0, inf)
+  field SFFloat  noise                  0.0     # [0, 1]
+  field SFString noiseMaskUrl           ""      # any string
+  field SFNode   lens                   NULL    # {Lens, PROTO}
+  field SFNode   focus                  NULL    # {Focus, PROTO}
+  field SFNode   zoom                   NULL    # {Zoom, PROTO}
+  field SFNode   recognition            TRUE    # {Recognition, PROTO}
+  field SFNode   lensFlare              NULL    # {LensFlare, PROTO}
+]
+{
+}
